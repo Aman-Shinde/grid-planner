@@ -41,7 +41,11 @@ const CloseButton = styled.button`
 
 const CodeContainer = styled.div`
   display: flex;
+  flex-direction: row;
   flex-grow: 1;
+  @media (max-width: 800px) {
+    flex-direction: column;
+}
 `;
 
 const CodeSection = styled.div`
