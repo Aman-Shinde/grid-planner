@@ -151,7 +151,7 @@ justify-content: center;
     border-color: #007bff;
     outline: none;
   }
-`;function Ca({numberOfFields:e,val:t,valPrefix:n,handleValChange:r}){return _.jsx(_.Fragment,{children:Array.from({length:e}).map((l,o)=>_.jsx(q0,{children:_.jsx(b0,{type:"number",min:1,value:t[`${n}${o+1}`]??1,onChange:i=>r(o,parseInt(i.target.value,10))})},o))})}const e1=M.div`
+`;function Ca({numberOfFields:e,val:t,valPrefix:n,handleValChange:r}){return _.jsx(_.Fragment,{children:Array.from({length:e}).map((l,o)=>_.jsx(q0,{children:_.jsx(b0,{type:"number",min:1,value:t[`${n}${o+1}`]??1,onChange:i=>r(o,parseInt(i.target.value,10))})},o))})}const em=M.div`
   display: ${({$isVisible:e})=>e?"flex":"none"};
   position: fixed;
   top: 0;
@@ -161,14 +161,14 @@ justify-content: center;
   background-color: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
-`,t1=M.div`
+`,tm=M.div`
   background: white;
   width: 80%;
   height: 80%;
   display: flex;
   flex-direction: column;
   position: relative;
-`,n1=M.button`
+`,nm=M.button`
   position: absolute;
   top: 10px;
   right: 10px;
@@ -176,9 +176,13 @@ justify-content: center;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-`,r1=M.div`
+`,rm=M.div`
   display: flex;
+  flex-direction: row;
   flex-grow: 1;
+  @media (max-width: 800px) {
+    flex-direction: column;
+}
 `,Ea=M.div`
   flex: 1;
   padding: 1rem;
@@ -205,7 +209,7 @@ justify-content: center;
   border: 1px solid black;
   width: 20%;
   margin: 24px 0 0 auto;
-`,l1=({htmlCode:e,cssCode:t,isOverlayVisible:n,setIsOverlayVisible:r})=>{const[l,o]=ne.useState("Copy HTML"),[i,u]=ne.useState("Copy CSS"),s=(c,m,h)=>{navigator.clipboard.writeText(c),m("Copied!"),setTimeout(()=>{m(h)},3e3)};return _.jsx(e1,{$isVisible:n,children:_.jsxs(t1,{children:[_.jsx(n1,{onClick:()=>r(!1),children:"×"}),_.jsxs(r1,{children:[_.jsxs(Ea,{children:[_.jsx(_a,{children:"HTML Code"}),_.jsx(Pa,{value:e,readOnly:!0}),_.jsx(Na,{onClick:()=>s(e,o,"Copy HTML"),children:l})]}),_.jsxs(Ea,{children:[_.jsx(_a,{children:"CSS Code"}),_.jsx(Pa,{value:t,readOnly:!0}),_.jsx(Na,{onClick:()=>s(t,u,"Copy CSS"),children:i})]})]})]})})},o1=M.div`
+`,lm=({htmlCode:e,cssCode:t,isOverlayVisible:n,setIsOverlayVisible:r})=>{const[l,o]=ne.useState("Copy HTML"),[i,u]=ne.useState("Copy CSS"),s=(c,m,h)=>{navigator.clipboard.writeText(c),m("Copied!"),setTimeout(()=>{m(h)},3e3)};return _.jsx(em,{$isVisible:n,children:_.jsxs(tm,{children:[_.jsx(nm,{onClick:()=>r(!1),children:"×"}),_.jsxs(rm,{children:[_.jsxs(Ea,{children:[_.jsx(_a,{children:"HTML Code"}),_.jsx(Pa,{value:e,readOnly:!0}),_.jsx(Na,{onClick:()=>s(e,o,"Copy HTML"),children:l})]}),_.jsxs(Ea,{children:[_.jsx(_a,{children:"CSS Code"}),_.jsx(Pa,{value:t,readOnly:!0}),_.jsx(Na,{onClick:()=>s(t,u,"Copy CSS"),children:i})]})]})]})})},om=M.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -216,7 +220,7 @@ justify-content: center;
         flex-direction: column;
         padding-bottom: 48px;
     }
-`,i1=M.div`
+`,im=M.div`
   width: 75%;
   height: 100%;
   display: grid;
@@ -227,13 +231,13 @@ justify-content: center;
   @media (max-width: 800px) {
     width: 100%;
 }
-`,u1=M.div`
+`,um=M.div`
   grid-area: 1 / 2 / 2 / 4; /* Spans the entire width except for side sections */
-`,s1=M.div`
+`,sm=M.div`
   grid-area: 2 / 1 / 4 / 2; /* Spans the entire height except for top section */
-`,a1=M.div`
+`,am=M.div`
   grid-area: 2 / 2 / 4 / 4; /* Center section */
-`,c1=M.div`
+`,cm=M.div`
   min-height: 48px;
   background-color: ${({$bgColor:e})=>e};
   display: flex;
@@ -246,7 +250,7 @@ justify-content: center;
   radial-gradient(#000 20%, transparent 20%);
   background-size: 5px 5px;            /* Size of the dots */
   background-position: 0 0, 5px 5px; 
-`,f1=e=>`hsl(${e*137.508%360}, 75%, 85%)`;function d1(){const[e,t]=ne.useState(!1),[n,r]=ne.useState(3),[l,o]=ne.useState(3),[i,u]=ne.useState(0),[s,c]=ne.useState(0),[m,h]=ne.useState(1),[p,g]=ne.useState(1),[y,S]=ne.useState({}),[$,f]=ne.useState({col1:1,col2:1,col3:1}),[a,d]=ne.useState({row1:1,row2:1,row3:1}),v=O=>{const j=parseInt(O.target.value,10);if(isNaN(j))h(1);else{const B=n*l;h(j>B?B:j)}},C=(O,j)=>{isNaN(j)&&(j=1),f(B=>({...B,[`col${O+1}`]:j}))},x=(O,j)=>{isNaN(j)&&(j=1),d(B=>({...B,[`row${O+1}`]:j}))},w=O=>{p!==null&&S(j=>{const B=j[p]||[],fe=B.includes(O)?B.filter(rt=>rt!==O):[...B,O];return{...j,[p]:fe}})};ne.useEffect(()=>{const O={};for(let j=1;j<=n;j++)O[`col${j}`]=$[`col${j}`]||1;f(O)},[n]),ne.useEffect(()=>{const O={};for(let j=1;j<=l;j++)O[`row${j}`]=a[`row${j}`]||1;d(O)},[l]);const N=()=>{r(3),o(3),u(0),c(0),h(1),g(1),S({}),f({col1:1,col2:1,col3:1}),d({row1:1,row2:1,row3:1})},U=()=>{const O=`
+`,fm=e=>`hsl(${e*137.508%360}, 75%, 85%)`;function dm(){const[e,t]=ne.useState(!1),[n,r]=ne.useState(3),[l,o]=ne.useState(3),[i,u]=ne.useState(0),[s,c]=ne.useState(0),[m,h]=ne.useState(1),[p,g]=ne.useState(1),[y,S]=ne.useState({}),[$,f]=ne.useState({col1:1,col2:1,col3:1}),[a,d]=ne.useState({row1:1,row2:1,row3:1}),v=O=>{const j=parseInt(O.target.value,10);if(isNaN(j))h(1);else{const B=n*l;h(j>B?B:j)}},C=(O,j)=>{isNaN(j)&&(j=1),f(B=>({...B,[`col${O+1}`]:j}))},x=(O,j)=>{isNaN(j)&&(j=1),d(B=>({...B,[`row${O+1}`]:j}))},w=O=>{p!==null&&S(j=>{const B=j[p]||[],fe=B.includes(O)?B.filter(rt=>rt!==O):[...B,O];return{...j,[p]:fe}})};ne.useEffect(()=>{const O={};for(let j=1;j<=n;j++)O[`col${j}`]=$[`col${j}`]||1;f(O)},[n]),ne.useEffect(()=>{const O={};for(let j=1;j<=l;j++)O[`row${j}`]=a[`row${j}`]||1;d(O)},[l]);const N=()=>{r(3),o(3),u(0),c(0),h(1),g(1),S({}),f({col1:1,col2:1,col3:1}),d({row1:1,row2:1,row3:1})},U=()=>{const O=`
 .grid-container {
   display: grid;
   grid-template-columns: ${Object.values($).map(B=>`${B}fr`).join(" ")};
@@ -268,4 +272,4 @@ ${j}`},I=()=>`
     `)}
 
 </div>
-      `;return _.jsxs(_.Fragment,{children:[_.jsx(J0,{}),_.jsxs(o1,{children:[_.jsx(G0,{setColumns:r,columns:n,setRows:o,rows:l,setColumnGap:u,columngap:i,setRowGap:c,rowgap:s,containers:m,handleContainersChange:v,setCurrentContainer:g,reset:N,setIsOverlayVisible:t}),_.jsxs(i1,{children:[_.jsx(u1,{children:_.jsx(qo,{columnWidth:$,rowHeight:{row1:1},columngap:i,rowgap:s,children:_.jsx(Ca,{numberOfFields:n,val:$,valPrefix:"col",handleValChange:C})})}),_.jsx(s1,{children:_.jsx(qo,{columnWidth:{col1:1},rowHeight:a,columngap:i,rowgap:s,children:_.jsx(Ca,{numberOfFields:l,val:a,valPrefix:"row",handleValChange:x})})}),_.jsx(a1,{children:_.jsx(qo,{columnWidth:$,rowHeight:a,columngap:i,rowgap:s,children:Array.from({length:n*l}).map((O,j)=>{var Le;const B=Object.values(y).some(E=>E.includes(j)),fe=(Le=y[p])==null?void 0:Le.includes(j),rt=B?f1(parseInt(Object.keys(y).find(E=>y[parseInt(E)].includes(j))??"1")-1):"",lt=B?`Container ${parseInt(Object.keys(y).find(E=>y[parseInt(E)].includes(j))??"1")}`:"";return _.jsx(c1,{$isSelected:fe,$bgColor:rt,onClick:()=>{(!B||fe)&&w(j)},children:lt},j)})})})]})]}),_.jsx(l1,{htmlCode:I(),cssCode:U(),isOverlayVisible:e,setIsOverlayVisible:t})]})}bo.createRoot(document.getElementById("root")).render(_.jsx($n.StrictMode,{children:_.jsx(d1,{})}));
+      `;return _.jsxs(_.Fragment,{children:[_.jsx(J0,{}),_.jsxs(om,{children:[_.jsx(G0,{setColumns:r,columns:n,setRows:o,rows:l,setColumnGap:u,columngap:i,setRowGap:c,rowgap:s,containers:m,handleContainersChange:v,setCurrentContainer:g,reset:N,setIsOverlayVisible:t}),_.jsxs(im,{children:[_.jsx(um,{children:_.jsx(qo,{columnWidth:$,rowHeight:{row1:1},columngap:i,rowgap:s,children:_.jsx(Ca,{numberOfFields:n,val:$,valPrefix:"col",handleValChange:C})})}),_.jsx(sm,{children:_.jsx(qo,{columnWidth:{col1:1},rowHeight:a,columngap:i,rowgap:s,children:_.jsx(Ca,{numberOfFields:l,val:a,valPrefix:"row",handleValChange:x})})}),_.jsx(am,{children:_.jsx(qo,{columnWidth:$,rowHeight:a,columngap:i,rowgap:s,children:Array.from({length:n*l}).map((O,j)=>{var Le;const B=Object.values(y).some(E=>E.includes(j)),fe=(Le=y[p])==null?void 0:Le.includes(j),rt=B?fm(parseInt(Object.keys(y).find(E=>y[parseInt(E)].includes(j))??"1")-1):"",lt=B?`Container ${parseInt(Object.keys(y).find(E=>y[parseInt(E)].includes(j))??"1")}`:"";return _.jsx(cm,{$isSelected:fe,$bgColor:rt,onClick:()=>{(!B||fe)&&w(j)},children:lt},j)})})})]})]}),_.jsx(lm,{htmlCode:I(),cssCode:U(),isOverlayVisible:e,setIsOverlayVisible:t})]})}bo.createRoot(document.getElementById("root")).render(_.jsx($n.StrictMode,{children:_.jsx(dm,{})}));
