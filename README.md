@@ -1,4 +1,5 @@
 # Grid Planner
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Here-green)](https://aman-shinde.github.io/grid-planner/)
 
 **Grid Planner** is a web application that enables users to design and visualize grid layouts. You can define grid configurations such as columns, rows, gaps, and containers, and generate the corresponding HTML and CSS code.
 
