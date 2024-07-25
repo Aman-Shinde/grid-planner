@@ -14,7 +14,7 @@ interface FormProps {
     handleContainersChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     setCurrentContainer: React.Dispatch<React.SetStateAction<number>>;
     reset : () => void;
-    getCode: () => void;
+    setIsOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const InputWrapper = styled.div`
@@ -89,7 +89,7 @@ const BlackButton = styled.button`
   border: 1px solid black;
 `;
 
-const Form = ({ setColumns, columns, setRows, rows, setColumnGap, columngap, setRowGap, rowgap, containers, handleContainersChange, setCurrentContainer, reset, getCode }: FormProps) => {
+const Form = ({ setColumns, columns, setRows, rows, setColumnGap, columngap, setRowGap, rowgap, containers, handleContainersChange, setCurrentContainer, reset, setIsOverlayVisible }: FormProps) => {
     return (
         <>
 
@@ -157,7 +157,7 @@ const Form = ({ setColumns, columns, setRows, rows, setColumnGap, columngap, set
 
                 <ButtonWrapper>
                     <WhiteButton onClick={reset}>Reset</WhiteButton>
-                    <BlackButton>Get my Code</BlackButton>
+                    <BlackButton onClick={() => { setIsOverlayVisible(true) }}>Get my Code</BlackButton>
                 </ButtonWrapper>
 
             </InputWrapper>

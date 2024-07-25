@@ -4,7 +4,7 @@ import FixedGrid from './components/FixedGrid';
 import Form from './components/Form';
 import Header from './components/Header';
 import InputFields from './components/InputFields';
-
+import Overlay from './components/Overlay';
 
 const RootWrapper = styled.div`
     display: flex;
@@ -68,6 +68,7 @@ const getColor = (num: number) => {
 };
 
 function App() {
+    const [isOverlayVisible, setIsOverlayVisible] = useState<boolean>(false);
     const [columns, setColumns] = useState<number>(3);
     const [rows, setRows] = useState<number>(3);
     const [columngap, setColumnGap] = useState<number>(0);
@@ -168,41 +169,47 @@ function App() {
         });
       };
 
-      const getCode = () => {
+      const getCssCode = () => {
+        const gridContainerCssCode = `
+.grid-container {
+  display: grid;
+  grid-template-columns: ${Object.values(columnWidth).map((value) => `${value}fr`).join(' ')};
+  grid-template-rows: ${Object.values(rowHeight).map((value) => `${value}fr`).join(' ')};
+  grid-column-gap: ${columngap}px;
+  grid-row-gap: ${rowgap}px;
+}
+`;
+      
+        const gridItemCssCode = Object.entries(selectedGridItems).map(([containerId, items]) => {
+          const [startRow, startCol] = [Math.floor(items[0] / columns) + 1, (items[0] % columns) + 1];
+          const [endRow, endCol] = [Math.floor(items[items.length - 1] / columns) + 1, (items[items.length - 1] % columns) + 1];
+      
+          return `
+.container-${containerId} {
+  grid-area: ${startRow} / ${startCol} / ${endRow + 1} / ${endCol + 1};
+  border: 1px solid black;
+}
+`;
+        }).join('\n');
+      
+        return `${gridContainerCssCode}\n${gridItemCssCode}`;
+      };
+      
+      const getHtmlCode = () => {
         const containerHTML = Object.keys(selectedGridItems).map(containerId => {
             return `<div class="container-${containerId}">Container-${containerId}</div>`;
-          }).join('\n');
+        }).join(`\n    `);
       
-          const htmlCode = `
-            <div class="grid-container">
-              ${containerHTML}
-            </div>
-          `;
+        return `
+<div class="grid-container">
 
-          const gridContainerCssCode = `
-          .grid-container {
-            display: grid;
-            grid-template-columns: ${(() => Object.values(columnWidth).map((value) => `${value}fr`).join(' '))()};
-            grid-template-rows: ${(() => Object.values(rowHeight).map((value) => `${value}fr`).join(' '))()};
-            grid-column-gap: ${(() => `${columngap}px`)()};
-            grid-row-gap: ${(() => `${rowgap}px`)()};
-          }
-        `;
-      
-          const gridItemCssCode = Object.entries(selectedGridItems).map(([containerId, items]) => {
-            const [startRow, startCol] = [Math.floor(items[0] / columns) + 1, (items[0] % columns) + 1];
-            const [endRow, endCol] = [Math.floor(items[items.length - 1] / columns) + 1, (items[items.length - 1] % columns) + 1];
-      
-            return `
-            .container-${containerId} {
-              grid-area: ${startRow} / ${startCol} / ${endRow + 1} / ${endCol + 1};
-              border: 1px solid black;
-            }
-          `;
-          }).join('\n');
+    ${containerHTML}
 
-      }
-
+</div>
+      `;
+      };
+    
+    
     return (
         <>
 
@@ -210,7 +217,7 @@ function App() {
 
             <RootWrapper>
 
-                <Form setColumns={setColumns} columns={columns} setRows={setRows} rows={rows} setColumnGap={setColumnGap} columngap={columngap} setRowGap={setRowGap} rowgap={rowgap} containers={containers} handleContainersChange={handleContainersChange} setCurrentContainer={setCurrentContainer} reset={reset} getCode={getCode} />
+                <Form setColumns={setColumns} columns={columns} setRows={setRows} rows={rows} setColumnGap={setColumnGap} columngap={columngap} setRowGap={setRowGap} rowgap={rowgap} containers={containers} handleContainersChange={handleContainersChange} setCurrentContainer={setCurrentContainer} reset={reset} setIsOverlayVisible={setIsOverlayVisible} />
 
                 <RootContainer>
 
@@ -280,6 +287,8 @@ function App() {
                 </RootContainer>
 
             </RootWrapper>
+        
+            <Overlay htmlCode={getHtmlCode()} cssCode={getCssCode()} isOverlayVisible={isOverlayVisible} setIsOverlayVisible={setIsOverlayVisible}/>
         </>
     );
 }
